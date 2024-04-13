@@ -19,14 +19,13 @@ class AudioRecorderManager : NSObject, ObservableObject{
     @Published var isPlaying: Bool = false
     @Published var recordingsList = [Recording]()
     @Published var isShowingRecordListView: Bool = false
-    
+    @Published var hasRecordFinished: Bool = false
+    @Published var showingAlert: Bool = false
     var indexOfPlayer = 0
     
     @Published var countSec = 0
     @Published var timerCount : Timer?
-    @Published var blinkingCount : Timer?
 //    @Published var timer : String = "0:00"
-    @Published var toggleColor : Bool = false
     
     var playingURL : URL?
     
@@ -48,8 +47,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
         }
         
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileName = path.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY 'at' HH:mm:ss")).m4a")
-        
+        let fileName = path.appendingPathComponent("\(Date().toString(dateFormat: "YY-MM-dd 'at' HH:mm:ss")).m4a")
         
         
         let settings = [
@@ -72,7 +70,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
                 self.countSec += 1
 //                self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
             })
-            blinkColor()
             
         } catch {
             print("Failed to Setup the Recording")
@@ -91,7 +88,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
         self.countSec = 0
         
         timerCount!.invalidate()
-        blinkingCount!.invalidate()
         
         stopUpdatingAudioLevels()
         
@@ -213,14 +209,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
         }
     }
     
-    func blinkColor() {
-        
-        blinkingCount = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (value) in
-            self.toggleColor.toggle()
-        })
-        
-    }
-    
     
     func getFileDate(for file: URL) -> Date {
         if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
@@ -243,7 +231,9 @@ extension AudioRecorderManager {
 }
 
 extension AudioRecorderManager: AVAudioRecorderDelegate {
-    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        hasRecordFinished = true
+    }
 }
 
 extension AudioRecorderManager: AVAudioPlayerDelegate {
