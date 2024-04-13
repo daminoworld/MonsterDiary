@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E710ACED2BC921810061D688 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */; };
+		E7A19DB22BC9121600477174 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A19DB12BC9121600477174 /* AppDelegate.swift */; };
+		E7A19DB62BC9121800477174 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB52BC9121800477174 /* Assets.xcassets */; };
+		E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB82BC9121800477174 /* Preview Assets.xcassets */; };
+		E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A19DBF2BC9182C00477174 /* HomeView.swift */; };
+		E7FDB95C2BC9551500655810 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95B2BC9551500655810 /* Recording.swift */; };
+		E7FDB9602BC955DA00655810 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95F2BC955DA00655810 /* Date+.swift */; };
+		E7FDB9622BC9561A00655810 /* RecordingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9612BC9561A00655810 /* RecordingListView.swift */; };
+		E7FDB9642BC957BE00655810 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9632BC957BE00655810 /* ARViewContainer.swift */; };
+		E7FDB9662BC9624900655810 /* DiaryMonsterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */; };
+		E7FDB9692BC9720A00655810 /* AudioPlayingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9682BC9720A00655810 /* AudioPlayingComponent.swift */; };
+		E7FDB96B2BC9776E00655810 /* MainDateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB96A2BC9776E00655810 /* MainDateComponent.swift */; };
+		E7FDB96D2BC977E300655810 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB96C2BC977E300655810 /* Color+.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
+		E775EB0B2BC91D3900325CAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E7A19DAE2BC9121600477174 /* MonsterDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonsterDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7A19DB12BC9121600477174 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E7A19DB52BC9121800477174 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7A19DB82BC9121800477174 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E7A19DBF2BC9182C00477174 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E7FDB95B2BC9551500655810 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		E7FDB95F2BC955DA00655810 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		E7FDB9612BC9561A00655810 /* RecordingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingListView.swift; sourceTree = "<group>"; };
+		E7FDB9632BC957BE00655810 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryMonsterApp.swift; sourceTree = "<group>"; };
+		E7FDB9682BC9720A00655810 /* AudioPlayingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayingComponent.swift; sourceTree = "<group>"; };
+		E7FDB96A2BC9776E00655810 /* MainDateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDateComponent.swift; sourceTree = "<group>"; };
+		E7FDB96C2BC977E300655810 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7A19DAB2BC9121600477174 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E7A19DA52BC9121600477174 = {
+			isa = PBXGroup;
+			children = (
+				E7A19DB02BC9121600477174 /* MonsterDiary */,
+				E7A19DAF2BC9121600477174 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E7A19DAF2BC9121600477174 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7A19DAE2BC9121600477174 /* MonsterDiary.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7A19DB02BC9121600477174 /* MonsterDiary */ = {
+			isa = PBXGroup;
+			children = (
+				E7FDB96E2BCA3F6700655810 /* Views */,
+				E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */,
+				E7FDB9672BC970BB00655810 /* Components */,
+				E7FDB95D2BC9553F00655810 /* Extension */,
+				E7FDB95E2BC9555D00655810 /* Model */,
+				E7A19DB12BC9121600477174 /* AppDelegate.swift */,
+				E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */,
+				E7A19DBF2BC9182C00477174 /* HomeView.swift */,
+				E7FDB9632BC957BE00655810 /* ARViewContainer.swift */,
+				E7FDB9612BC9561A00655810 /* RecordingListView.swift */,
+				E7A19DB52BC9121800477174 /* Assets.xcassets */,
+				E775EB0B2BC91D3900325CAA /* Info.plist */,
+				E7A19DB72BC9121800477174 /* Preview Content */,
+			);
+			path = MonsterDiary;
+			sourceTree = "<group>";
+		};
+		E7A19DB72BC9121800477174 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E7A19DB82BC9121800477174 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E7FDB95D2BC9553F00655810 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E7FDB95F2BC955DA00655810 /* Date+.swift */,
+				E7FDB96C2BC977E300655810 /* Color+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E7FDB95E2BC9555D00655810 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E7FDB95B2BC9551500655810 /* Recording.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E7FDB9672BC970BB00655810 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E7FDB9682BC9720A00655810 /* AudioPlayingComponent.swift */,
+				E7FDB96A2BC9776E00655810 /* MainDateComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E7FDB96E2BCA3F6700655810 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7A19DAD2BC9121600477174 /* MonsterDiary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7A19DBC2BC9121800477174 /* Build configuration list for PBXNativeTarget "MonsterDiary" */;
+			buildPhases = (
+				E7A19DAA2BC9121600477174 /* Sources */,
+				E7A19DAB2BC9121600477174 /* Frameworks */,
+				E7A19DAC2BC9121600477174 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonsterDiary;
+			productName = MonsterDiary;
+			productReference = E7A19DAE2BC9121600477174 /* MonsterDiary.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7A19DA62BC9121600477174 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					E7A19DAD2BC9121600477174 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = E7A19DA92BC9121600477174 /* Build configuration list for PBXProject "MonsterDiary" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E7A19DA52BC9121600477174;
+			productRefGroup = E7A19DAF2BC9121600477174 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7A19DAD2BC9121600477174 /* MonsterDiary */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7A19DAC2BC9121600477174 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */,
+				E7A19DB62BC9121800477174 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7A19DAA2BC9121600477174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7FDB9692BC9720A00655810 /* AudioPlayingComponent.swift in Sources */,
+				E710ACED2BC921810061D688 /* AudioRecorderManager.swift in Sources */,
+				E7FDB9642BC957BE00655810 /* ARViewContainer.swift in Sources */,
+				E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */,
+				E7FDB96B2BC9776E00655810 /* MainDateComponent.swift in Sources */,
+				E7FDB9662BC9624900655810 /* DiaryMonsterApp.swift in Sources */,
+				E7FDB9622BC9561A00655810 /* RecordingListView.swift in Sources */,
+				E7FDB9602BC955DA00655810 /* Date+.swift in Sources */,
+				E7FDB96D2BC977E300655810 /* Color+.swift in Sources */,
+				E7A19DB22BC9121600477174 /* AppDelegate.swift in Sources */,
+				E7FDB95C2BC9551500655810 /* Recording.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E7A19DBA2BC9121800477174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E7A19DBB2BC9121800477174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7A19DBD2BC9121800477174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MonsterDiary/Preview Content\"";
+				DEVELOPMENT_TEAM = AFS6YUQ2Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MonsterDiary/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"당신의 카메라를 써도 되겠습니까?\"";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"당신의 마이크를 써도 되겠습니까?\"";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myorganization.MonsterDiary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E7A19DBE2BC9121800477174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MonsterDiary/Preview Content\"";
+				DEVELOPMENT_TEAM = AFS6YUQ2Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MonsterDiary/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"당신의 카메라를 써도 되겠습니까?\"";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"당신의 마이크를 써도 되겠습니까?\"";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myorganization.MonsterDiary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7A19DA92BC9121600477174 /* Build configuration list for PBXProject "MonsterDiary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7A19DBA2BC9121800477174 /* Debug */,
+				E7A19DBB2BC9121800477174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7A19DBC2BC9121800477174 /* Build configuration list for PBXNativeTarget "MonsterDiary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7A19DBD2BC9121800477174 /* Debug */,
+				E7A19DBE2BC9121800477174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E7A19DA62BC9121600477174 /* Project object */;
+}
