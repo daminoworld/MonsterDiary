@@ -25,6 +25,8 @@ class AudioRecorderManager : NSObject, ObservableObject , AVAudioPlayerDelegate{
     @Published var timer : String = "0:00"
     @Published var toggleColor : Bool = false
     
+    @Published var isShowingRecordListView: Bool = false
+    
     
     var playingURL : URL?
     
