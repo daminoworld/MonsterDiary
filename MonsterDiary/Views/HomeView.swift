@@ -24,9 +24,11 @@ struct HomeView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color(hex: "252525", alpha: 0.9))
                                 .opacity(0.9)
-                                .frame(width: 179, height: 32)
+                                .frame(width: 100, height: 40)
                                 .overlay {
-                                    Text("오늘의 일기 생성중...")
+                                    Text("\(audioManager.timerString)")
+                                        .font(.subheadline)
+                                        .fontWeight(.semibold)
                                         .foregroundStyle(.white)
                                 }
                                 .padding(.top, 30)
@@ -38,7 +40,7 @@ struct HomeView: View {
                 .alert("일기 제목을 입력해주세요", isPresented: $audioManager.showingAlert) {
                     TextField("오늘의 일기", text: $recordingName)
                     Button("Save") {
-                        // 저장 로직 구현
+                        audioManager.showingAlert = false
                     }
                 } message: {
                     Text("최대 15자 이내로 입력해주세요")

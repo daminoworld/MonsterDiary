@@ -29,6 +29,9 @@ struct MainTabComponent: View {
                 Spacer()
                 
                 Button {
+                    if audioManager.isRecording {
+                        audioManager.stopRecording()
+                    }
                     audioManager.isShowingRecordListView = true
                 } label: {
                     Image("history")

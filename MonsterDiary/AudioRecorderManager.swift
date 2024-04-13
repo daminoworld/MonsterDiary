@@ -25,7 +25,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
     
     @Published var countSec = 0
     @Published var timerCount : Timer?
-//    @Published var timer : String = "0:00"
+    @Published var timerString : String = "0:00"
     
     var playingURL : URL?
     
@@ -68,7 +68,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
             
             timerCount = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (value) in
                 self.countSec += 1
-//                self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
+                self.timerString = self.covertSecToMinAndHour(seconds: self.countSec)
             })
             
         } catch {
@@ -84,12 +84,12 @@ class AudioRecorderManager : NSObject, ObservableObject{
         
         audioRecorder.stop()
         isRecording = false
+        stopUpdatingAudioLevels()
+
         
         self.countSec = 0
-        
         timerCount!.invalidate()
         
-        stopUpdatingAudioLevels()
         
     }
     
