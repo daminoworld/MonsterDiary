@@ -6,7 +6,6 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             ARViewContainer().ignoresSafeArea(.all)
-            Color.white
 
             VStack {
                 MainDateComponent()
@@ -14,8 +13,22 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                AudioPlayingComponent()
-                    .frame(width: 114, height: 114)
+                if audioManager.isRecording {
+                    VStack {
+                        AudioPlayingComponent()
+                            .frame(width: 114, height: 114)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(hex: "252525", alpha: 0.9))
+                            .opacity(0.9)
+                            .frame(width: 179, height: 32)
+                            .overlay {
+                                Text("오늘의 일기 생성중...")
+                                    .foregroundStyle(.white)
+                            }
+                            .padding(.top, 30)
+                    }
+                }
                 
                 Spacer()
                 

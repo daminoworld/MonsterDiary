@@ -127,7 +127,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
                   return previousLevel * 0.5 + targetLevel * 0.8  // 더 빠른 변화를 위해 비율 조정
               }
           }
-        print("audioLevels", audioLevels)
     }
 
     func stopUpdatingAudioLevels() {
