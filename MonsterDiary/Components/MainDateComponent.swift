@@ -11,9 +11,8 @@ struct MainDateComponent: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Color(hex: "252525"))
+                .fill(Color(hex: "252525", alpha: 0.9))
                 .opacity(0.9)
-                .blur(radius: 3.0, opaque: true)
                 .clipShape(.rect(cornerRadius: 20))
                 .frame(width: 227, height: 48)
             

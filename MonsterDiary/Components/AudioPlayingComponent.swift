@@ -26,4 +26,5 @@ struct AudioPlayingComponent: View {
 
 #Preview {
     AudioPlayingComponent()
+        .environmentObject(AudioRecorderManager())
 }

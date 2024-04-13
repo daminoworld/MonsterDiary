@@ -12,6 +12,7 @@
 		E7A19DB62BC9121800477174 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB52BC9121800477174 /* Assets.xcassets */; };
 		E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB82BC9121800477174 /* Preview Assets.xcassets */; };
 		E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A19DBF2BC9182C00477174 /* HomeView.swift */; };
+		E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */; };
 		E7FDB95C2BC9551500655810 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95B2BC9551500655810 /* Recording.swift */; };
 		E7FDB9602BC955DA00655810 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95F2BC955DA00655810 /* Date+.swift */; };
 		E7FDB9622BC9561A00655810 /* RecordingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9612BC9561A00655810 /* RecordingListView.swift */; };
@@ -30,6 +31,7 @@
 		E7A19DB52BC9121800477174 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7A19DB82BC9121800477174 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E7A19DBF2BC9182C00477174 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabComponent.swift; sourceTree = "<group>"; };
 		E7FDB95B2BC9551500655810 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E7FDB95F2BC955DA00655810 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		E7FDB9612BC9561A00655810 /* RecordingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingListView.swift; sourceTree = "<group>"; };
@@ -70,14 +72,13 @@
 		E7A19DB02BC9121600477174 /* MonsterDiary */ = {
 			isa = PBXGroup;
 			children = (
-				E7FDB96E2BCA3F6700655810 /* Views */,
 				E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */,
 				E7FDB9672BC970BB00655810 /* Components */,
+				E7FDB96E2BCA3F6700655810 /* Views */,
 				E7FDB95D2BC9553F00655810 /* Extension */,
 				E7FDB95E2BC9555D00655810 /* Model */,
 				E7A19DB12BC9121600477174 /* AppDelegate.swift */,
 				E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */,
-				E7A19DBF2BC9182C00477174 /* HomeView.swift */,
 				E7FDB9632BC957BE00655810 /* ARViewContainer.swift */,
 				E7FDB9612BC9561A00655810 /* RecordingListView.swift */,
 				E7A19DB52BC9121800477174 /* Assets.xcassets */,
@@ -117,6 +118,7 @@
 			children = (
 				E7FDB9682BC9720A00655810 /* AudioPlayingComponent.swift */,
 				E7FDB96A2BC9776E00655810 /* MainDateComponent.swift */,
+				E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -124,6 +126,7 @@
 		E7FDB96E2BCA3F6700655810 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7A19DBF2BC9182C00477174 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				E7FDB96D2BC977E300655810 /* Color+.swift in Sources */,
 				E7A19DB22BC9121600477174 /* AppDelegate.swift in Sources */,
 				E7FDB95C2BC9551500655810 /* Recording.swift in Sources */,
+				E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
