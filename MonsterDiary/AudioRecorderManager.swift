@@ -8,25 +8,25 @@
 import Foundation
 import AVFoundation
 
-class AudioRecorderManager : NSObject, ObservableObject , AVAudioPlayerDelegate{
+class AudioRecorderManager : NSObject, ObservableObject{
     
     var audioRecorder : AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
-    
-    var indexOfPlayer = 0
+    var recordBarTimer: Timer?
+
     @Published var audioLevels: [CGFloat] = [0.5, 0.3, 0.6, 0.4, 0.7, 0.2, 0.5]
     @Published var isRecording : Bool = false
     @Published var isPlaying: Bool = false
     @Published var recordingsList = [Recording]()
+    @Published var isShowingRecordListView: Bool = false
+    
+    var indexOfPlayer = 0
     
     @Published var countSec = 0
     @Published var timerCount : Timer?
     @Published var blinkingCount : Timer?
-    @Published var timer : String = "0:00"
+//    @Published var timer : String = "0:00"
     @Published var toggleColor : Bool = false
-    
-    @Published var isShowingRecordListView: Bool = false
-    
     
     var playingURL : URL?
     
@@ -36,18 +36,7 @@ class AudioRecorderManager : NSObject, ObservableObject , AVAudioPlayerDelegate{
         fetchAllRecording()
         
     }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-       
-        for i in 0..<recordingsList.count {
-            if recordingsList[i].fileURL == playingURL {
-                recordingsList[i].isPlaying = false
-            }
-        }
-    }
-    
-  
-    
+
     func startRecording() {
         
         let recordingSession = AVAudioSession.sharedInstance()
@@ -59,7 +48,7 @@ class AudioRecorderManager : NSObject, ObservableObject , AVAudioPlayerDelegate{
         }
         
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileName = path.appendingPathComponent("CO-Voice : \(Date().toString(dateFormat: "dd-MM-YY 'at' HH:mm:ss")).m4a")
+        let fileName = path.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY 'at' HH:mm:ss")).m4a")
         
         
         
@@ -73,26 +62,30 @@ class AudioRecorderManager : NSObject, ObservableObject , AVAudioPlayerDelegate{
         
         do {
             audioRecorder = try AVAudioRecorder(url: fileName, settings: settings)
+            audioRecorder?.delegate = self
+            audioRecorder?.isMeteringEnabled = true
             audioRecorder.prepareToRecord()
             audioRecorder.record()
             isRecording = true
             
             timerCount = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (value) in
                 self.countSec += 1
-                self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
+//                self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
             })
             blinkColor()
             
         } catch {
             print("Failed to Setup the Recording")
         }
+        
+        
+        startUpdatingAudioLevels()
     }
     
     
     func stopRecording(){
         
         audioRecorder.stop()
-        
         isRecording = false
         
         self.countSec = 0
@@ -100,6 +93,46 @@ class AudioRecorderManager : NSObject, ObservableObject , AVAudioPlayerDelegate{
         timerCount!.invalidate()
         blinkingCount!.invalidate()
         
+        stopUpdatingAudioLevels()
+        
+    }
+    
+    func startUpdatingAudioLevels() {
+        recordBarTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.updateAudioLevels()
+        }
+    }
+
+    func updateAudioLevels() {
+        audioRecorder?.updateMeters()
+
+        // 실제 오디오 레벨을 얻습니다.
+          if let averagePower = audioRecorder?.averagePower(forChannel: 0) {
+              let baseLevel = CGFloat(max(0.2, pow(10.0, averagePower / 20)))  // 데시벨 값을 선형 스케일로 변환
+
+//              // 기본 레벨을 사용하여 각 막대의 높이를 조금씩 다르게 합니다.
+//              audioLevels = (0..<10).map { _ in
+//                  let randomVariance = CGFloat.random(in: 0.8...1.2)  // 무작위 변형 범위
+//                  return CGFloat(baseLevel) * randomVariance
+//              }
+              
+              // 기본 레벨을 사용하여 각 막대의 높이를 조금씩 다르게 합니다.
+              // 무작위 변형을 적용할 때 더 큰 범위를 사용합니다.
+              audioLevels = audioLevels.enumerated().map { index, previousLevel in
+                  let randomVariance = CGFloat.random(in: 0.5...1.5)  // 무작위 변형 범위 확장
+                  let targetLevel = baseLevel * randomVariance
+                  
+                  // 현재 레벨과 목표 레벨 사이를 부드럽게 전환
+                  // 변화 속도를 늦추거나 빠르게 조절하여 더 동적인 효과를 줄 수 있습니다.
+                  return previousLevel * 0.5 + targetLevel * 0.8  // 더 빠른 변화를 위해 비율 조정
+              }
+          }
+        print("audioLevels", audioLevels)
+    }
+
+    func stopUpdatingAudioLevels() {
+        recordBarTimer?.invalidate()
+        audioLevels = [0.5, 0.3, 0.6, 0.4, 0.7, 0.2, 0.5]
     }
     
     
@@ -210,3 +243,17 @@ extension AudioRecorderManager {
     }
 }
 
+extension AudioRecorderManager: AVAudioRecorderDelegate {
+    
+}
+
+extension AudioRecorderManager: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+       
+        for i in 0..<recordingsList.count {
+            if recordingsList[i].fileURL == playingURL {
+                recordingsList[i].isPlaying = false
+            }
+        }
+    }
+}

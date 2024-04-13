@@ -6,10 +6,16 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             ARViewContainer().ignoresSafeArea(.all)
-            
+            Color.white
+
             VStack {
                 MainDateComponent()
                     .padding(20)
+                
+                Spacer()
+                
+                AudioPlayingComponent()
+                    .frame(width: 114, height: 114)
                 
                 Spacer()
                 

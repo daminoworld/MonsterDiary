@@ -9,13 +9,22 @@ import SwiftUI
 
 struct AudioPlayingComponent: View {
     @EnvironmentObject var audioManager: AudioRecorderManager
+    
     var body: some View {
-            HStack(alignment: .bottom, spacing: 2) {
+            HStack(alignment: .center, spacing: 8) {
                 ForEach(audioManager.audioLevels.indices, id: \.self) { index in
-                    Rectangle()
-                        .frame(width: 20, height: audioManager.audioLevels[index] * 200) // 예를 들어 최대 높이는 200
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .fill(.white)
+                        .frame(width: 10, height: audioManager.audioLevels[index] * 100)
                         .animation(.easeInOut, value: audioManager.audioLevels[index])
                 }
+            }
+//            .padding(40)
+            .background {
+                Circle()
+                    .fill(Color(hex: "252525", alpha: 0.9))
+                    .opacity(0.9)
+                    .frame(width: 150, height: 150)
             }
             .onAppear {
             }
