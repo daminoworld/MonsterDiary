@@ -17,24 +17,23 @@ struct HomeView: View {
                     Spacer()
                     
                     if audioManager.isRecording {
-                        VStack {
-                            AudioPlayingComponent()
-                                .frame(width: 114, height: 114)
-                            
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(hex: "252525", alpha: 0.9))
-                                .opacity(0.9)
-                                .frame(width: 100, height: 40)
-                                .overlay {
-                                    Text("\(audioManager.timerString)")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.white)
-                                }
-                                .padding(.top, 30)
-                        }
-                        .offset(y: -20)
+                        AudioPlayingComponent()
+                            .frame(width: 114, height: 114)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(hex: "252525", alpha: 0.9))
+                            .opacity(0.9)
+                            .frame(width: 100, height: 40)
+                            .overlay {
+                                Text("\(audioManager.timerString)")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                            }
+                            .padding(.top, 30)
                     }
+                    
+                    Spacer()
                     Spacer()
                 }
                 .alert("일기 제목을 입력해주세요", isPresented: $audioManager.showingAlert) {
