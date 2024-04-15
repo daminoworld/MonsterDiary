@@ -9,31 +9,28 @@ import SwiftUI
 
 struct MainTabComponent: View {
     @EnvironmentObject var audioManager: AudioRecorderManager
+
     var body: some View {
         ZStack {
             Rectangle()
                 .fill(Color(hex: "252525", alpha: 0.9))
                 .opacity(0.9)
             HStack {
-                Button {
-                audioManager.isRecording ? audioManager.stopRecording() : audioManager.startRecording()
-                    
-                } label: {
+                Button(action: {
+                    audioManager.toggleRecording()
+                }) {
                     Image("record_ring")
                         .overlay {
-                            Image(audioManager.isRecording ? "record_spuare" :"record_circle")
+                            Image(audioManager.isRecording ? "record_spuare" : "record_circle")
                                 .animation(nil)
                         }
                 }
                 
                 Spacer()
                 
-                Button {
-                    if audioManager.isRecording {
-                        audioManager.stopRecording()
-                    }
+                Button(action: {
                     audioManager.isShowingRecordListView = true
-                } label: {
+                }) {
                     Image("history")
                 }
             }

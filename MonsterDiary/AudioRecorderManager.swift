@@ -13,6 +13,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
     var audioRecorder : AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
     var recordBarTimer: Timer?
+    var countTimer : Timer?
 
     @Published var audioLevels: [CGFloat] = [0.5, 0.3, 0.6, 0.4, 0.7, 0.2, 0.5]
     @Published var isRecording : Bool = false
@@ -21,12 +22,11 @@ class AudioRecorderManager : NSObject, ObservableObject{
     @Published var isShowingRecordListView: Bool = false
     @Published var hasRecordFinished: Bool = false
     @Published var showingAlert: Bool = false
-    var indexOfPlayer = 0
-    
+    @Published var recordingName: String = ""
     @Published var countSec = 0
-    @Published var timerCount : Timer?
     @Published var timerString : String = "0:00"
-    
+    @Published var tempRecordingURL: URL? // 녹음을 임시로 저장할 URL
+    var indexOfPlayer = 0
     var playingURL : URL?
     
     override init(){
@@ -35,62 +35,84 @@ class AudioRecorderManager : NSObject, ObservableObject{
         fetchAllRecording()
         
     }
+    
+    
 
     func startRecording() {
-        
-        let recordingSession = AVAudioSession.sharedInstance()
+        let session = AVAudioSession.sharedInstance()
         do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
-            try recordingSession.setActive(true)
+            try session.setCategory(.playAndRecord, mode: .default)
+            try session.setActive(true)
         } catch {
-            print("Cannot setup the Recording")
+            print("Failed to set up recording session")
         }
-        
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileName = path.appendingPathComponent("\(Date().toString(dateFormat: "YY-MM-dd 'at' HH:mm:ss")).m4a")
-        
-        
+
+        let tempFileName = UUID().uuidString + ".m4a" // 임시 파일 이름 생성
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let tempFileURL = documentPath.appendingPathComponent(tempFileName)
+
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
-        
-        
+
         do {
-            audioRecorder = try AVAudioRecorder(url: fileName, settings: settings)
-            audioRecorder?.delegate = self
-            audioRecorder?.isMeteringEnabled = true
+            audioRecorder = try AVAudioRecorder(url: tempFileURL, settings: settings)
             audioRecorder.prepareToRecord()
             audioRecorder.record()
-            isRecording = true
-            
-            timerCount = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (value) in
+            tempRecordingURL = tempFileURL // 임시 파일 URL 저장
+            print("템프파일", tempRecordingURL?.absoluteString)
+            countTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (value) in
                 self.countSec += 1
                 self.timerString = self.covertSecToMinAndHour(seconds: self.countSec)
             })
             
         } catch {
-            print("Failed to Setup the Recording")
+            print("Recording failed to start")
         }
         
-        
         startUpdatingAudioLevels()
+
     }
     
-    
     func stopRecording(){
-        
         audioRecorder.stop()
-        isRecording = false
         stopUpdatingAudioLevels()
-
+        tempRecordingURL = audioRecorder.url
+        countSec = 0
+        timerString = "0:00"
+        showingAlert = true
         
-        self.countSec = 0
-        timerCount!.invalidate()
+        if let countTimer {
+            countTimer.invalidate()
+        }
+    }
+    
+    func saveRecording(with title: String) {
+        guard let tempURL = tempRecordingURL else { return }
         
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let newFileName = title.isEmpty ? Date().toString(dateFormat: "YY-MM-dd'일기'") : title
+        let newFileURL = path.appendingPathComponent("\(newFileName).m4a")
         
+        do {
+            try FileManager.default.moveItem(at: tempURL, to: newFileURL)
+            // 업데이트 된 레코딩 목록 등 후속 처리
+        } catch {
+            print("Error saving recording: \(error)")
+        }
+    }
+    
+    func toggleRecording() {
+        if isRecording {
+            isRecording = false
+            stopRecording()
+        } else {
+            isRecording = true
+            startRecording()
+        }
     }
     
     func startUpdatingAudioLevels() {
@@ -137,7 +159,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
         let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
 
         for i in directoryContents {
-            recordingsList.append(Recording(fileURL : i, createdAt:getFileDate(for: i), isPlaying: false))
+            recordingsList.append(Recording(fileURL: i, createdAt: getFileDate(for: i), isPlaying: false))
         }
         
         recordingsList.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})

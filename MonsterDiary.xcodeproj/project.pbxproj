@@ -73,12 +73,12 @@
 			isa = PBXGroup;
 			children = (
 				E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */,
+				E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */,
 				E7FDB9672BC970BB00655810 /* Components */,
 				E7FDB96E2BCA3F6700655810 /* Views */,
 				E7FDB95D2BC9553F00655810 /* Extension */,
 				E7FDB95E2BC9555D00655810 /* Model */,
 				E7A19DB12BC9121600477174 /* AppDelegate.swift */,
-				E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */,
 				E7FDB9632BC957BE00655810 /* ARViewContainer.swift */,
 				E7FDB9612BC9561A00655810 /* RecordingListView.swift */,
 				E7A19DB52BC9121800477174 /* Assets.xcassets */,
