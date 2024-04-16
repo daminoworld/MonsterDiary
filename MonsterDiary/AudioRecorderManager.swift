@@ -22,7 +22,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
     @Published var isShowingRecordListView: Bool = false
     @Published var hasRecordFinished: Bool = false
     @Published var showingAlert: Bool = false
-    @Published var recordingName: String = ""
     @Published var countSec = 0
     @Published var timerString : String = "0:00"
     @Published var tempRecordingURL: URL? // 녹음을 임시로 저장할 URL
@@ -50,7 +49,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
         let tempFileName = UUID().uuidString + ".m4a" // 임시 파일 이름 생성
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let tempFileURL = documentPath.appendingPathComponent(tempFileName)
-
+        
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
@@ -63,7 +62,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
             audioRecorder.prepareToRecord()
             audioRecorder.record()
             tempRecordingURL = tempFileURL // 임시 파일 URL 저장
-            print("템프파일", tempRecordingURL?.absoluteString)
             countTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (value) in
                 self.countSec += 1
                 self.timerString = self.covertSecToMinAndHour(seconds: self.countSec)
@@ -74,7 +72,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
         }
         
         startUpdatingAudioLevels()
-
     }
     
     func stopRecording(){
@@ -92,10 +89,17 @@ class AudioRecorderManager : NSObject, ObservableObject{
     
     func saveRecording(with title: String) {
         guard let tempURL = tempRecordingURL else { return }
-        
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let newFileName = title.isEmpty ? Date().toString(dateFormat: "YY-MM-dd'일기'") : title
-        let newFileURL = path.appendingPathComponent("\(newFileName).m4a")
+        let newFileName = title.isEmpty ? Date().toString(dateFormat: "yyyy.MM.dd '일기'") : title
+        var newFileURL = path.appendingPathComponent("\(newFileName).m4a")
+        
+        // 파일 이름 중복 처리
+        var counter = 1
+        while FileManager.default.fileExists(atPath: newFileURL.path) {
+            let duplicatedFileName = "\(newFileName) (\(counter))"
+            newFileURL = path.appendingPathComponent("\(duplicatedFileName).m4a")
+            counter += 1
+        }
         
         do {
             try FileManager.default.moveItem(at: tempURL, to: newFileURL)
@@ -166,6 +170,23 @@ class AudioRecorderManager : NSObject, ObservableObject{
         
     }
     
+    func fetchRecordings() {
+        let fileManager = FileManager.default
+        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
+        do {
+            // fileManager 인스턴스를 통해 참조해야함!
+            let urls = try fileManager.contentsOfDirectory(at: documentPath, includingPropertiesForKeys: nil)
+            recordingsList = urls.filter { $0.pathExtension == "m4a" }.map { url -> Recording in
+                let attributes = try? fileManager.attributesOfItem(atPath: url.path)
+                let creationDate = attributes?[.creationDate] as? Date ?? Date()
+                return Recording(fileURL: url, createdAt: creationDate, isPlaying: false)
+            }.sorted { $0.createdAt > $1.createdAt }
+        } catch {
+            print("Error loading recordings: \(error)")
+        }
+    }
+    
     
     func startPlaying(url : URL) {
         
@@ -210,25 +231,23 @@ class AudioRecorderManager : NSObject, ObservableObject{
     }
     
  
-    func deleteRecording(url : URL) {
+    func deleteRecording(offsets : IndexSet) {
         
-        do {
-            try FileManager.default.removeItem(at: url)
-        } catch {
-            print("Can't delete")
-        }
-        
-        for i in 0..<recordingsList.count {
-            
-            if recordingsList[i].fileURL == url {
-                if recordingsList[i].isPlaying == true{
-                    stopPlaying(url: recordingsList[i].fileURL)
-                }
-                recordingsList.remove(at: i)
-                
-                break
+        for index in offsets {
+            let recordingURL = recordingsList[index].fileURL
+            if recordingsList[index].isPlaying == true{
+                stopPlaying(url: recordingsList[index].fileURL)
+            }
+            do {
+                // 파일 시스템에서 파일 삭제
+                try FileManager.default.removeItem(at: recordingURL)
+            } catch {
+                print("Can't delete with \(error)")
             }
         }
+       
+        // 녹음 목록에서 해당 인덱스 삭제
+        recordingsList.remove(atOffsets: offsets)
     }
     
     

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var audioManager: AudioRecorderManager
-    @State private var isShowingList: Bool = false
     @State private var recordingName: String = ""
     
     var body: some View {
@@ -37,21 +36,21 @@ struct HomeView: View {
                     Spacer()
                 }
                 .alert("일기 제목을 입력해주세요", isPresented: $audioManager.showingAlert) {
-                    TextField("오늘의 일기", text: $recordingName)
+                    TextField("\(Date().toString(dateFormat: "yyyy.MM.dd '일기'"))", text: $recordingName)
                     Button("저장") {
-
-                        if recordingName.isEmpty {
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy.MM.dd"
-                            recordingName = "\(dateFormatter.string(from: Date())) 일기"
-                        }
-                        audioManager.recordingName = recordingName // AudioRecorderManager에 제목 업데이트
-                        print("저장된 제목: \(recordingName)")
-                        recordingName = ""
                         audioManager.showingAlert = false
                     }
                 } message: {
                     Text("최대 15자 이내로 입력해주세요")
+                }
+                
+                // deprecated 됐는데 쓰라고 하는 init과 차이가 없는데 어떻게 구분?
+                .onChange(of: audioManager.showingAlert) { newValue in
+                    // alert이 꺼질때만 실행
+                    if !newValue  {
+                        audioManager.saveRecording(with: recordingName)
+                        recordingName = ""
+                    }
                 }
                 
                 
@@ -60,9 +59,6 @@ struct HomeView: View {
                     .ignoresSafeArea()
                     .frame(height: 134)
                 
-            }
-            .sheet(isPresented: $isShowingList) {
-                RecordingListView()
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             

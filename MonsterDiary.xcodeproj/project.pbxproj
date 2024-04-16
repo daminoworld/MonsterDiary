@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E710ACED2BC921810061D688 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */; };
+		E74D9FEC2BCCBDF50079411D /* RecordingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74D9FEB2BCCBDF50079411D /* RecordingHistoryView.swift */; };
 		E7A19DB22BC9121600477174 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A19DB12BC9121600477174 /* AppDelegate.swift */; };
 		E7A19DB62BC9121800477174 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB52BC9121800477174 /* Assets.xcassets */; };
 		E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB82BC9121800477174 /* Preview Assets.xcassets */; };
@@ -15,7 +16,6 @@
 		E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */; };
 		E7FDB95C2BC9551500655810 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95B2BC9551500655810 /* Recording.swift */; };
 		E7FDB9602BC955DA00655810 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95F2BC955DA00655810 /* Date+.swift */; };
-		E7FDB9622BC9561A00655810 /* RecordingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9612BC9561A00655810 /* RecordingListView.swift */; };
 		E7FDB9642BC957BE00655810 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9632BC957BE00655810 /* ARViewContainer.swift */; };
 		E7FDB9662BC9624900655810 /* DiaryMonsterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */; };
 		E7FDB9692BC9720A00655810 /* AudioPlayingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9682BC9720A00655810 /* AudioPlayingComponent.swift */; };
@@ -25,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
+		E74D9FEB2BCCBDF50079411D /* RecordingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingHistoryView.swift; sourceTree = "<group>"; };
 		E775EB0B2BC91D3900325CAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E7A19DAE2BC9121600477174 /* MonsterDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonsterDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A19DB12BC9121600477174 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabComponent.swift; sourceTree = "<group>"; };
 		E7FDB95B2BC9551500655810 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E7FDB95F2BC955DA00655810 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		E7FDB9612BC9561A00655810 /* RecordingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingListView.swift; sourceTree = "<group>"; };
 		E7FDB9632BC957BE00655810 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryMonsterApp.swift; sourceTree = "<group>"; };
 		E7FDB9682BC9720A00655810 /* AudioPlayingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayingComponent.swift; sourceTree = "<group>"; };
@@ -80,7 +80,6 @@
 				E7FDB95E2BC9555D00655810 /* Model */,
 				E7A19DB12BC9121600477174 /* AppDelegate.swift */,
 				E7FDB9632BC957BE00655810 /* ARViewContainer.swift */,
-				E7FDB9612BC9561A00655810 /* RecordingListView.swift */,
 				E7A19DB52BC9121800477174 /* Assets.xcassets */,
 				E775EB0B2BC91D3900325CAA /* Info.plist */,
 				E7A19DB72BC9121800477174 /* Preview Content */,
@@ -127,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				E7A19DBF2BC9182C00477174 /* HomeView.swift */,
+				E74D9FEB2BCCBDF50079411D /* RecordingHistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,12 +207,12 @@
 				E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */,
 				E7FDB96B2BC9776E00655810 /* MainDateComponent.swift in Sources */,
 				E7FDB9662BC9624900655810 /* DiaryMonsterApp.swift in Sources */,
-				E7FDB9622BC9561A00655810 /* RecordingListView.swift in Sources */,
 				E7FDB9602BC955DA00655810 /* Date+.swift in Sources */,
 				E7FDB96D2BC977E300655810 /* Color+.swift in Sources */,
 				E7A19DB22BC9121600477174 /* AppDelegate.swift in Sources */,
 				E7FDB95C2BC9551500655810 /* Recording.swift in Sources */,
 				E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */,
+				E74D9FEC2BCCBDF50079411D /* RecordingHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

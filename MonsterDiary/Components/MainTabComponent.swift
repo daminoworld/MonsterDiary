@@ -38,6 +38,9 @@ struct MainTabComponent: View {
             .padding(.leading, 167)
             .padding(.bottom)
         }
+        .sheet(isPresented: $audioManager.isShowingRecordListView, content: {
+            RecordingHistoryView()
+        })
     }
 }
 
