@@ -14,6 +14,7 @@
 		E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB82BC9121800477174 /* Preview Assets.xcassets */; };
 		E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A19DBF2BC9182C00477174 /* HomeView.swift */; };
 		E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */; };
+		E7EF16612BCEA803007987C0 /* kittyGhost_purple.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7EF16602BCEA803007987C0 /* kittyGhost_purple.usdz */; };
 		E7FDB95C2BC9551500655810 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95B2BC9551500655810 /* Recording.swift */; };
 		E7FDB9602BC955DA00655810 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95F2BC955DA00655810 /* Date+.swift */; };
 		E7FDB9642BC957BE00655810 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB9632BC957BE00655810 /* ARViewContainer.swift */; };
@@ -33,6 +34,7 @@
 		E7A19DB82BC9121800477174 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E7A19DBF2BC9182C00477174 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabComponent.swift; sourceTree = "<group>"; };
+		E7EF16602BCEA803007987C0 /* kittyGhost_purple.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = kittyGhost_purple.usdz; sourceTree = "<group>"; };
 		E7FDB95B2BC9551500655810 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E7FDB95F2BC955DA00655810 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		E7FDB9632BC957BE00655810 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
@@ -79,9 +81,9 @@
 				E7FDB95D2BC9553F00655810 /* Extension */,
 				E7FDB95E2BC9555D00655810 /* Model */,
 				E7A19DB12BC9121600477174 /* AppDelegate.swift */,
-				E7FDB9632BC957BE00655810 /* ARViewContainer.swift */,
 				E7A19DB52BC9121800477174 /* Assets.xcassets */,
 				E775EB0B2BC91D3900325CAA /* Info.plist */,
+				E7EF16602BCEA803007987C0 /* kittyGhost_purple.usdz */,
 				E7A19DB72BC9121800477174 /* Preview Content */,
 			);
 			path = MonsterDiary;
@@ -127,6 +129,7 @@
 			children = (
 				E7A19DBF2BC9182C00477174 /* HomeView.swift */,
 				E74D9FEB2BCCBDF50079411D /* RecordingHistoryView.swift */,
+				E7FDB9632BC957BE00655810 /* ARViewContainer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,6 +150,8 @@
 			dependencies = (
 			);
 			name = MonsterDiary;
+			packageProductDependencies = (
+			);
 			productName = MonsterDiary;
 			productReference = E7A19DAE2BC9121600477174 /* MonsterDiary.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +180,8 @@
 				Base,
 			);
 			mainGroup = E7A19DA52BC9121600477174;
+			packageReferences = (
+			);
 			productRefGroup = E7A19DAF2BC9121600477174 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -191,6 +198,7 @@
 			files = (
 				E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */,
 				E7A19DB62BC9121800477174 /* Assets.xcassets in Resources */,
+				E7EF16612BCEA803007987C0 /* kittyGhost_purple.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
