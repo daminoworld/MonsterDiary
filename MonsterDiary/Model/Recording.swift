@@ -9,7 +9,7 @@ import Foundation
 
 struct Recording : Equatable {
     let fileURL : URL
-    let createdAt : Date
+    let createdAt : String
     var isPlaying : Bool
     
 }

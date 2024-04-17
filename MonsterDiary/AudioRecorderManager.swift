@@ -163,7 +163,9 @@ class AudioRecorderManager : NSObject, ObservableObject{
         let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
 
         for i in directoryContents {
-            recordingsList.append(Recording(fileURL: i, createdAt: getFileDate(for: i), isPlaying: false))
+            
+            let createdString = getFileDate(for: i).toString(dateFormat: "yyyy.MM.dd")
+            recordingsList.append(Recording(fileURL: i, createdAt: createdString, isPlaying: false))
         }
         
         recordingsList.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
@@ -180,7 +182,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
             recordingsList = urls.filter { $0.pathExtension == "m4a" }.map { url -> Recording in
                 let attributes = try? fileManager.attributesOfItem(atPath: url.path)
                 let creationDate = attributes?[.creationDate] as? Date ?? Date()
-                return Recording(fileURL: url, createdAt: creationDate, isPlaying: false)
+                return Recording(fileURL: url, createdAt: creationDate.toString(dateFormat: "yyyy.MM.dd"), isPlaying: false)
             }.sorted { $0.createdAt > $1.createdAt }
         } catch {
             print("Error loading recordings: \(error)")
