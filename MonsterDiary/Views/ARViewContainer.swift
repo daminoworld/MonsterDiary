@@ -5,12 +5,15 @@ import ARKit
 struct ARViewContainer: UIViewRepresentable {
     @EnvironmentObject var audioManager: AudioRecorderManager
     @EnvironmentObject var arManager: ARModelManager
-//    @State private var weekRecording: [Int:Recording] = [:]
-
+    
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: .ar, automaticallyConfigureSession: false)
         let calendar = Calendar.current
         let today = Date()
+        let maxPerRow = 2  // 한 줄에 최대 2개의 모델
+        var currentRow = 0
+        var itemCountInRow = 0
+        let modelScale: Float = 0.013
         
         for (index, day) in Week.allCases.enumerated() {
             guard let modelEntity = try? ModelEntity.loadModel(named: "kittyGhost_purple") else { return arView }
@@ -39,11 +42,34 @@ struct ARViewContainer: UIViewRepresentable {
                     modelEntity.model?.materials = [SimpleMaterial(color: modelColor, isMetallic: false), SimpleMaterial(color: .black, isMetallic: false),SimpleMaterial(color: .black, isMetallic: false)]
                     
                     let anchor = AnchorEntity()
-                    // 요일별로 다른 위치에 배치
-                    modelEntity.position = SIMD3(x: Float(index) * 0.1, y: -0.3, z: -0.3)
-                    modelEntity.generateCollisionShapes(recursive: true)
+//                    print("position", modelEntity.position)
+//                    print("scale", modelEntity.scale)
+//                    // 요일별로 다른 위치에 배치
+//                    modelEntity.position = SIMD3(x: Float(index) * 0.5, y: -0.3, z: -0.2)
+//                    modelEntity.scale =  SIMD3(x: modelEntity.scale.x*3, y: modelEntity.scale.y*3, z: modelEntity.scale.z*3)
+//                    modelEntity.generateCollisionShapes(recursive: true)
                     anchor.addChild(modelEntity)
                     arView.scene.anchors.append(anchor)
+                    modelEntity.scale = SIMD3(repeating: modelScale)
+                    
+                    // 모델 배치 로직
+                    // 간격 증가 로직
+                    let horizontalSpacing: Float = 0.15 // x 축 간격
+                    let verticalSpacing: Float = 0.18   // y 축 간격
+                    let xPosition = Float(itemCountInRow) * horizontalSpacing - (Float(maxPerRow - 1) * horizontalSpacing / 2)
+                    let yPosition = Float(currentRow) * verticalSpacing - 0.3 // 행에 따른 y축 오프셋
+                    
+                    modelEntity.position = SIMD3(x: xPosition, y: yPosition, z: -0.35)
+                    modelEntity.generateCollisionShapes(recursive: true)
+                    
+                    anchor.addChild(modelEntity)
+                    arView.scene.anchors.append(anchor)
+                    
+                    itemCountInRow += 1
+                    if itemCountInRow >= maxPerRow {
+                        currentRow += 1
+                        itemCountInRow = 0
+                    }
                     
                 }
             }

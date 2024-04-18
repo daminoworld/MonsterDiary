@@ -11,6 +11,6 @@ struct Recording : Equatable {
     let fileURL : URL
     let createdAtDate: Date
     let createdAtString : String
-    var isPlaying : Bool
+    var isPlaying : Bool = false
     let day: Week
 }
