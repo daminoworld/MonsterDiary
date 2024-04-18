@@ -14,6 +14,8 @@
 		E7A19DB92BC9121800477174 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A19DB82BC9121800477174 /* Preview Assets.xcassets */; };
 		E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A19DBF2BC9182C00477174 /* HomeView.swift */; };
 		E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */; };
+		E7D50F002BCFB43B00C524AA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D50EFF2BCFB43B00C524AA /* UIColor+.swift */; };
+		E7D50F022BCFBEAD00C524AA /* ARModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D50F012BCFBEAD00C524AA /* ARModelManager.swift */; };
 		E7EF16612BCEA803007987C0 /* kittyGhost_purple.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7EF16602BCEA803007987C0 /* kittyGhost_purple.usdz */; };
 		E7FDB95C2BC9551500655810 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95B2BC9551500655810 /* Recording.swift */; };
 		E7FDB9602BC955DA00655810 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDB95F2BC955DA00655810 /* Date+.swift */; };
@@ -34,6 +36,8 @@
 		E7A19DB82BC9121800477174 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E7A19DBF2BC9182C00477174 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E7BAB5A32BCA49C3006537D2 /* MainTabComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabComponent.swift; sourceTree = "<group>"; };
+		E7D50EFF2BCFB43B00C524AA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		E7D50F012BCFBEAD00C524AA /* ARModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModelManager.swift; sourceTree = "<group>"; };
 		E7EF16602BCEA803007987C0 /* kittyGhost_purple.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = kittyGhost_purple.usdz; sourceTree = "<group>"; };
 		E7FDB95B2BC9551500655810 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E7FDB95F2BC955DA00655810 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -75,7 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				E7FDB9652BC9624900655810 /* DiaryMonsterApp.swift */,
-				E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */,
+				E7D50F032BD0C28700C524AA /* Manager */,
 				E7FDB9672BC970BB00655810 /* Components */,
 				E7FDB96E2BCA3F6700655810 /* Views */,
 				E7FDB95D2BC9553F00655810 /* Extension */,
@@ -97,11 +101,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		E7D50F032BD0C28700C524AA /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				E710ACEC2BC921810061D688 /* AudioRecorderManager.swift */,
+				E7D50F012BCFBEAD00C524AA /* ARModelManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		E7FDB95D2BC9553F00655810 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				E7FDB95F2BC955DA00655810 /* Date+.swift */,
 				E7FDB96C2BC977E300655810 /* Color+.swift */,
+				E7D50EFF2BCFB43B00C524AA /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -215,10 +229,12 @@
 				E7A19DC02BC9182C00477174 /* HomeView.swift in Sources */,
 				E7FDB96B2BC9776E00655810 /* MainDateComponent.swift in Sources */,
 				E7FDB9662BC9624900655810 /* DiaryMonsterApp.swift in Sources */,
+				E7D50F022BCFBEAD00C524AA /* ARModelManager.swift in Sources */,
 				E7FDB9602BC955DA00655810 /* Date+.swift in Sources */,
 				E7FDB96D2BC977E300655810 /* Color+.swift in Sources */,
 				E7A19DB22BC9121600477174 /* AppDelegate.swift in Sources */,
 				E7FDB95C2BC9551500655810 /* Recording.swift in Sources */,
+				E7D50F002BCFB43B00C524AA /* UIColor+.swift in Sources */,
 				E7BAB5A42BCA49C3006537D2 /* MainTabComponent.swift in Sources */,
 				E74D9FEC2BCCBDF50079411D /* RecordingHistoryView.swift in Sources */,
 			);

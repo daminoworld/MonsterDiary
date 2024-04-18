@@ -2,12 +2,15 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var audioManager: AudioRecorderManager
+    @EnvironmentObject var arManager: ARModelManager
+
     @State private var recordingName: String = ""
+    let arViewContainer = ARViewContainer()
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                ARViewContainer().ignoresSafeArea(.all)
+                arViewContainer.ignoresSafeArea(.all)
                 
                 VStack {
                     MainDateComponent()
@@ -64,7 +67,7 @@ struct HomeView: View {
             
             
         }
-        
+         
     }
 }
 

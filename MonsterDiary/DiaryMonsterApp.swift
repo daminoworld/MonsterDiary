@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct DiaryMonsterApp: App {
     @StateObject var audioManager = AudioRecorderManager()
-
+    @StateObject var arManager = ARModelManager()
     var body: some Scene {
         WindowGroup {
             HomeView()
                 .environmentObject(audioManager)
+                .environmentObject(arManager)
         }
     }
 }

@@ -30,7 +30,7 @@ struct RecordingHistoryView: View {
                                     .font(.system(size:30))
                             }
                         }
-                        Text("created at: \(recording.createdAt)")
+                        Text("created at: \(recording.createdAtString)")
                             .font(.caption)
                             .foregroundStyle(.blue)
                     }
@@ -39,7 +39,7 @@ struct RecordingHistoryView: View {
                 .onDelete(perform: audioManager.deleteRecording)
             }
             .navigationBarTitle("History")
-            .onAppear(perform: audioManager.fetchRecordings)
+            .onAppear(perform: audioManager.fetchAllRecording)
             
         }
     }

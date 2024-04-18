@@ -20,12 +20,10 @@ class AudioRecorderManager : NSObject, ObservableObject{
     @Published var isPlaying: Bool = false
     @Published var recordingsList = [Recording]()
     @Published var isShowingRecordListView: Bool = false
-    @Published var hasRecordFinished: Bool = false
     @Published var showingAlert: Bool = false
     @Published var countSec = 0
     @Published var timerString : String = "0:00"
     @Published var tempRecordingURL: URL? // 녹음을 임시로 저장할 URL
-    var indexOfPlayer = 0
     var playingURL : URL?
     
     override init(){
@@ -59,9 +57,11 @@ class AudioRecorderManager : NSObject, ObservableObject{
 
         do {
             audioRecorder = try AVAudioRecorder(url: tempFileURL, settings: settings)
+            audioRecorder.isMeteringEnabled = true
+            audioRecorder.delegate = self
             audioRecorder.prepareToRecord()
             audioRecorder.record()
-            tempRecordingURL = tempFileURL // 임시 파일 URL 저장
+            tempRecordingURL = audioRecorder.url // 임시 파일 URL 저장
             countTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (value) in
                 self.countSec += 1
                 self.timerString = self.covertSecToMinAndHour(seconds: self.countSec)
@@ -77,7 +77,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
     func stopRecording(){
         audioRecorder.stop()
         stopUpdatingAudioLevels()
-        tempRecordingURL = audioRecorder.url
         countSec = 0
         timerString = "0:00"
         showingAlert = true
@@ -132,20 +131,9 @@ class AudioRecorderManager : NSObject, ObservableObject{
           if let averagePower = audioRecorder?.averagePower(forChannel: 0) {
               let baseLevel = CGFloat(max(0.2, pow(10.0, averagePower / 20)))  // 데시벨 값을 선형 스케일로 변환
 
-//              // 기본 레벨을 사용하여 각 막대의 높이를 조금씩 다르게 합니다.
-//              audioLevels = (0..<10).map { _ in
-//                  let randomVariance = CGFloat.random(in: 0.8...1.2)  // 무작위 변형 범위
-//                  return CGFloat(baseLevel) * randomVariance
-//              }
-              
-              // 기본 레벨을 사용하여 각 막대의 높이를 조금씩 다르게 합니다.
-              // 무작위 변형을 적용할 때 더 큰 범위를 사용합니다.
               audioLevels = audioLevels.enumerated().map { index, previousLevel in
                   let randomVariance = CGFloat.random(in: 0.5...1.5)  // 무작위 변형 범위 확장
                   let targetLevel = baseLevel * randomVariance
-                  
-                  // 현재 레벨과 목표 레벨 사이를 부드럽게 전환
-                  // 변화 속도를 늦추거나 빠르게 조절하여 더 동적인 효과를 줄 수 있습니다.
                   return previousLevel * 0.5 + targetLevel * 0.8  // 더 빠른 변화를 위해 비율 조정
               }
           }
@@ -160,35 +148,23 @@ class AudioRecorderManager : NSObject, ObservableObject{
     func fetchAllRecording(){
         
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
-
-        for i in directoryContents {
-            
-            let createdString = getFileDate(for: i).toString(dateFormat: "yyyy.MM.dd")
-            recordingsList.append(Recording(fileURL: i, createdAt: createdString, isPlaying: false))
-        }
         
-        recordingsList.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedDescending})
-        
-    }
-    
-    func fetchRecordings() {
-        let fileManager = FileManager.default
-        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
         do {
-            // fileManager 인스턴스를 통해 참조해야함!
-            let urls = try fileManager.contentsOfDirectory(at: documentPath, includingPropertiesForKeys: nil)
-            recordingsList = urls.filter { $0.pathExtension == "m4a" }.map { url -> Recording in
-                let attributes = try? fileManager.attributesOfItem(atPath: url.path)
-                let creationDate = attributes?[.creationDate] as? Date ?? Date()
-                return Recording(fileURL: url, createdAt: creationDate.toString(dateFormat: "yyyy.MM.dd"), isPlaying: false)
-            }.sorted { $0.createdAt > $1.createdAt }
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
+            for i in directoryContents {
+                let createdAtDate = getFileDate(for: i)
+                let createdAtString = createdAtDate.toString(dateFormat: "yyyy.MM.dd")
+                recordingsList.append(Recording(fileURL: i,createdAtDate: createdAtDate, createdAtString: createdAtString, isPlaying: false))
+            }
         } catch {
             print("Error loading recordings: \(error)")
+
         }
+        
+        recordingsList.sort(by: { $0.createdAtDate.compare($1.createdAtDate) == .orderedDescending})
+        
     }
-    
     
     func startPlaying(url : URL) {
         
@@ -217,8 +193,6 @@ class AudioRecorderManager : NSObject, ObservableObject{
         } catch {
             print("Playing Failed")
         }
-        
-        
     }
     
     func stopPlaying(url : URL) {
@@ -275,7 +249,6 @@ extension AudioRecorderManager {
 
 extension AudioRecorderManager: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        hasRecordFinished = true
     }
 }
 
