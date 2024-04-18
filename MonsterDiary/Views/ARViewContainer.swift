@@ -4,25 +4,57 @@ import ARKit
 
 struct ARViewContainer: UIViewRepresentable {
     @EnvironmentObject var audioManager: AudioRecorderManager
-    @StateObject private var arManager: ARModelManager = ARModelManager()
+    @EnvironmentObject var arManager: ARModelManager
+//    @State private var weekRecording: [Int:Recording] = [:]
 
     func makeUIView(context: Context) -> ARView {
-        let arView = ARView(frame: .zero)
-        let arModelDict = arManager.loadModels()
+        let arView = ARView(frame: .zero, cameraMode: .ar, automaticallyConfigureSession: false)
+        let calendar = Calendar.current
+        let today = Date()
+        
         for (index, day) in Week.allCases.enumerated() {
-            guard let modelEntity = arModelDict[day] else { return arView}
-            
-            let anchor = AnchorEntity(plane: .horizontal)
-            // 요일별로 다른 위치에 배치
-            modelEntity.position = SIMD3(x: Float(index) * 0.1, y: 0, z: 0)
-            modelEntity.generateCollisionShapes(recursive: true)
-            anchor.addChild(modelEntity)
-            arView.scene.anchors.append(anchor)
+            guard let modelEntity = try? ModelEntity.loadModel(named: "kittyGhost_purple") else { return arView }
+            if let lastWeekDate = calendar.date(byAdding: .day, value: -index, to: today) {
+                let recording = audioManager.fetchRecordingWithDate(date: lastWeekDate)
+                var modelColor = UIColor.white
+                if let recording {
+                    // ModelEntity와 hashValue로 Recording을 매핑
+                    audioManager.weekRecording[modelEntity.hashValue] = recording
+                    switch recording.day  {
+                    case .mon:
+                        modelColor = UIColor(hex: "#ff6666")
+                    case .tue:
+                        modelColor =  UIColor(hex: "#ffbd55")
+                    case .wed:
+                        modelColor =  UIColor(hex: "#ffff66")
+                    case .thr:
+                        modelColor =  UIColor(hex: "#9de24f")
+                    case .fri:
+                        modelColor =  UIColor(hex: "#87cefa")
+                    case .sat:
+                        modelColor =  UIColor(hex: "#4b0082")
+                    case .sun:
+                        modelColor =  UIColor(hex: "#ee82ee")
+                    }
+                    modelEntity.model?.materials = [SimpleMaterial(color: modelColor, isMetallic: false), SimpleMaterial(color: .black, isMetallic: false),SimpleMaterial(color: .black, isMetallic: false)]
+                    
+                    let anchor = AnchorEntity()
+                    // 요일별로 다른 위치에 배치
+                    modelEntity.position = SIMD3(x: Float(index) * 0.1, y: -0.3, z: -0.3)
+                    modelEntity.generateCollisionShapes(recursive: true)
+                    anchor.addChild(modelEntity)
+                    arView.scene.anchors.append(anchor)
+                    
+                }
+            }
         }
+        
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap))
         arView.addGestureRecognizer(tapGesture)
         arManager.arView = arView
-        
+        let config = ARWorldTrackingConfiguration()
+        config.frameSemantics.insert(.personSegmentationWithDepth)
+        arView.session.run(config)
         return arView
     }
     
@@ -38,7 +70,7 @@ struct ARViewContainer: UIViewRepresentable {
         /// 실제 모델의 위치(0,0,0)와 model.postion의 위치가 달라서 움직이 제대로 적용 안됨
         let startPosition = model.position
         let endPosition = SIMD3(startPosition.x, startPosition.y + 0.1, startPosition.z)
-        let controller = model.move(to: Transform(scale: model.scale, translation: endPosition), relativeTo: nil, duration: 0.5, timingFunction: .easeInOut)
+        _ = model.move(to: Transform(scale: model.scale, translation: endPosition), relativeTo: nil, duration: 0.5, timingFunction: .easeInOut)
     }
     
     
@@ -70,10 +102,9 @@ struct ARViewContainer: UIViewRepresentable {
 
             if let firstResult = results.first {
                 parent.audioManager.fetchAllRecording()
-                parent.arManager.togglePeopleOcclusion()
                 playAnimation(entity: firstResult.entity)
-//                parent.animateModel(model: firstResult.entity, startPosition: firstResult.position)
-
+                guard let recording = parent.audioManager.weekRecording[firstResult.entity.hashValue] else { return }
+                parent.audioManager.startPlaying(url: recording.fileURL)
             }
         }
     

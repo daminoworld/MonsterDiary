@@ -14,7 +14,8 @@ class AudioRecorderManager : NSObject, ObservableObject{
     var audioPlayer : AVAudioPlayer!
     var recordBarTimer: Timer?
     var countTimer : Timer?
-
+    var weekRecording: [Int:Recording] = [:]
+    
     @Published var audioLevels: [CGFloat] = [0.5, 0.3, 0.6, 0.4, 0.7, 0.2, 0.5]
     @Published var isRecording : Bool = false
     @Published var isPlaying: Bool = false
@@ -24,6 +25,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
     @Published var countSec = 0
     @Published var timerString : String = "0:00"
     @Published var tempRecordingURL: URL? // 녹음을 임시로 저장할 URL
+    @Published var weekRecordingList: [Recording] = []
     var playingURL : URL?
     
     override init(){
@@ -155,7 +157,28 @@ class AudioRecorderManager : NSObject, ObservableObject{
             for i in directoryContents {
                 let createdAtDate = getFileDate(for: i)
                 let createdAtString = createdAtDate.toString(dateFormat: "yyyy.MM.dd")
-                recordingsList.append(Recording(fileURL: i,createdAtDate: createdAtDate, createdAtString: createdAtString, isPlaying: false))
+                var day: Week = .mon
+                
+                switch createdAtDate.dayString() {
+                case "Mon":
+                    day = .mon
+                case "Tue":
+                    day = .tue
+                case "Wed":
+                    day = .wed
+                case "Thu":
+                    day = .thr
+                case "Fri":
+                    day = .fri
+                case "Sat":
+                    day = .sat
+                case "Sun":
+                    day = .sun
+                default:
+                    break
+                }
+                
+                recordingsList.append(Recording(fileURL: i,createdAtDate: createdAtDate, createdAtString: createdAtString, isPlaying: false, day: day))
             }
         } catch {
             print("Error loading recordings: \(error)")
@@ -173,9 +196,11 @@ class AudioRecorderManager : NSObject, ObservableObject{
         let playSession = AVAudioSession.sharedInstance()
         
         do {
+            try playSession.setCategory(.playback, mode: .default)
+            try playSession.setActive(true)
             try playSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
         } catch {
-            print("Playing failed in Device")
+            print("Playing failed in Device \(error)")
         }
         
         do {
@@ -191,7 +216,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
             }
             
         } catch {
-            print("Playing Failed")
+            print("Playing Failed \(error)")
         }
     }
     
@@ -233,6 +258,28 @@ class AudioRecorderManager : NSObject, ObservableObject{
             return creationDate
         } else {
             return Date()
+        }
+    }
+    
+    func fetchRecordingWithDate(date: Date) -> Recording? {
+        
+        let calendar = Calendar.current
+        var lastRecordingsByDay: [Date: Recording] = [:]
+        
+        for recording in recordingsList {
+            if calendar.isDate(recording.createdAtDate, inSameDayAs: date) {
+                if let lastRecording = lastRecordingsByDay[date], lastRecording.createdAtDate < recording.createdAtDate {
+                    lastRecordingsByDay[date] = recording
+                } else if lastRecordingsByDay[date] == nil {
+                    lastRecordingsByDay[date] = recording
+                }
+            }
+        }
+        
+        if let latestRecording = lastRecordingsByDay[date] {
+            return latestRecording
+        }else {
+            return nil
         }
     }
 }

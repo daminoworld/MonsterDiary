@@ -23,7 +23,7 @@ struct MainDateComponent: View {
 
                 Spacer()
                 
-                Text(Date().dayString(date: Date()))
+                Text(Date().dayString())
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                     .padding(.trailing, 20)

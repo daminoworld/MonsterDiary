@@ -17,12 +17,12 @@ extension Date {
         
     }
     
-    func dayString(date: Date) -> String {
+    func dayString() -> String {
             let formatter = DateFormatter()
             formatter.dateFormat = "E"  // "E"는 주의 일을 약어로 표시합니다.
             formatter.locale = Locale(identifier: "en_US")
             formatter.timeZone = TimeZone(identifier: "Asia/Seoul") // 한국 시간대
-            return formatter.string(from: date)
+            return formatter.string(from: self)
         }
 
 }

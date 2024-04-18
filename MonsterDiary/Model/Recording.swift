@@ -12,4 +12,5 @@ struct Recording : Equatable {
     let createdAtDate: Date
     let createdAtString : String
     var isPlaying : Bool
+    let day: Week
 }
