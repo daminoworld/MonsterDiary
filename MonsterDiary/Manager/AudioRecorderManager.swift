@@ -148,6 +148,7 @@ class AudioRecorderManager : NSObject, ObservableObject{
     
     
     func fetchAllRecording(){
+        recordingsList = []
         
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
