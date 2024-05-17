@@ -21,8 +21,6 @@ struct ARViewContainer: UIViewRepresentable {
                 let recording = audioManager.fetchRecordingWithDate(date: lastWeekDate)
                 var modelColor = UIColor.white
                 if let recording {
-                    // ModelEntity와 hashValue로 Recording을 매핑
-                    audioManager.weekRecording[modelEntity.hashValue] = recording
                     switch recording.day  {
                     case .mon:
                         modelColor = UIColor(hex: "#ff6666")
@@ -39,6 +37,7 @@ struct ARViewContainer: UIViewRepresentable {
                     case .sun:
                         modelColor =  UIColor(hex: "#ee82ee")
                     }
+                    print("모델 수", modelEntity.model?.mesh.contents.models.count)
                     modelEntity.model?.materials = [SimpleMaterial(color: modelColor, isMetallic: false), SimpleMaterial(color: .black, isMetallic: false),SimpleMaterial(color: .black, isMetallic: false)]
                     
                     let anchor = AnchorEntity()
